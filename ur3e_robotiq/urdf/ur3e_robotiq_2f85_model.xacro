@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<robot name="robotiq_arg2f_85_model" xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <xacro:arg name="transmission_hw_interface" default="hardware_interface/PositionJointInterface"/>
+
+    <!-- robotiq -->
+    <xacro:include filename="$(find robotiq_2f_85_gripper_visualization)/urdf/robotiq_arg2f_85_model.xacro" />
+
+    <!-- ur3e -->
+    <xacro:include filename="$(find ur_e_description)/urdf/ur3e.urdf.xacro" />
+
+    <!-- arm -->
+    <xacro:arg name="kinematics_config" default="$(find ur_e_description)/config/ur3e_default.yaml"/>
+    <xacro:ur3e_robot prefix="" joint_limited="false"
+      transmission_hw_interface="$(arg transmission_hw_interface)"
+      kinematics_file="${load_yaml('$(arg kinematics_config)')}"
+    />
+
+    <joint name="arm_gripper_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="0 0 1.57"/>
+      <parent link="tool0"/>
+      <child link="robotiq_arg2f_base_link"/>
+    </joint>
+
+    <link name="bottom_plan">
+      <visual>
+        <origin xyz="0.28 0.05 -0.11" rpy="0 0 0" />
+        <geometry>
+          <box size="1.0 1.0 0.2"/>
+        </geometry>
+        <material name="">
+          <color rgba="1 1 1 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0.28 0.05 -0.11" rpy="0 0 0" />
+        <geometry>
+           <box size="1.0 1.0 0.2"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="base_bottom_plan" type="fixed">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <parent link="base"/>
+      <child link="bottom_plan"/>
+    </joint>
+</robot>
