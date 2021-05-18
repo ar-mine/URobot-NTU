@@ -2,7 +2,8 @@
   <arg name="sim" default="false" />
   <arg name="limited" default="false"/>
   <arg name="debug" default="false" />
-    
+  <arg name="allow_trajectory_execution" default="true"/>
+
   <!-- Remap follow_joint_trajectory -->
   <remap if="$(arg sim)" from="/follow_joint_trajectory" to="/arm_controller/follow_joint_trajectory"/>
   
@@ -10,5 +11,6 @@
   <include file="$(find ur3e_robotiq_config)/launch/move_group.launch">
     <arg name="limited" default="$(arg limited)"/>
     <arg name="debug" default="$(arg debug)" />
+    <arg name="allow_trajectory_execution" default="$(arg allow_trajectory_execution)" />
   </include>
 </launch>
