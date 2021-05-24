@@ -8,7 +8,7 @@
   
   <!-- Publish the transform from camera_link to base_link, so that all other /tf transforms can be got -->
   <node pkg="tf2_ros" type="static_transform_publisher" name="camera_color_broadcaster"
-      args="0.065, -1.169, 0.714   -0.185, 0.103, 0.858, 0.468 /base_link /camera_link"/>
+      args="0.065, -1.169, 0.714   -0.185, 0.103, 0.858, 0.468 /base_link /nuitrack_link"/>
 
   <!-- Parameters for ur_common-> -->
   <arg name="debug" default="false" doc="Debug flag that will get passed on to ur_common.launch"/>
