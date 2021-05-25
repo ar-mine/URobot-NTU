@@ -1,0 +1,31 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "",
+        "limitSymbolsToIncludedHeaders": true
+      },
+      "includePath": [
+        "/home/armine/Codes/ROS/UR_ws/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/armine/Codes/ROS/UR_ws/src/URobot-NTU/UR_Robot_Driver/controller_stopper/include/**",
+        "/home/armine/Codes/ROS/UR_ws/src/moveit_resources-master/prbt_ikfast_manipulator_plugin/include/**",
+        "/home/armine/Codes/ROS/UR_ws/src/URobot-NTU/nuitrack_ros/nuitrack_core/include/**",
+        "/home/armine/Codes/ROS/UR_ws/src/octomap_mapping/octomap_server/include/**",
+        "/home/armine/Codes/ROS/UR_ws/src/URobot-NTU/realsense-ros/realsense2_camera/include/**",
+        "/home/armine/Codes/ROS/UR_ws/src/URobot-NTU/robotiq/robotiq_2f_gripper_action_server/include/**",
+        "/home/armine/Codes/ROS/UR_ws/src/URobot-NTU/robotiq/robotiq_2f_gripper_control/include/**",
+        "/home/armine/Codes/ROS/UR_ws/src/URobot-NTU/robotiq/robotiq_ethercat/include/**",
+        "/home/armine/Codes/ROS/UR_ws/src/URobot-NTU/robotiq/robotiq_ft_sensor/include/**",
+        "/home/armine/Codes/ROS/UR_ws/src/URobot-NTU/ur3e_robotiq/include/**",
+        "/home/armine/Codes/ROS/UR_ws/src/URobot-NTU/UR_Robot_Driver/ur_controllers/include/**",
+        "/home/armine/Codes/ROS/UR_ws/src/URobot-NTU/UR_Robot_Driver/ur_robot_driver/include/**",
+        "/home/armine/Codes/ROS/UR_ws/src/urdf_learning/include/**",
+        "/usr/include/**",
+        "/usr/include/pcl-1.10/**"
+      ],
+      "name": "ROS"
+    }
+  ],
+  "version": 4
+}

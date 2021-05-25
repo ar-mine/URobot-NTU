@@ -30,6 +30,8 @@ find_package(octomap REQUIRED)
 add_definitions(-DOCTOMAP_NODEBUGOUT)
 find_package(Eigen3 REQUIRED)
 find_package(Boost REQUIRED system filesystem date_time thread)
+find_package(PCL REQUIRED)
+find_package(realsense2 REQUIRED)
 
 
 catkin_package(
@@ -48,13 +50,9 @@ catkin_package(
 
 include_directories(${THIS_PACKAGE_INCLUDE_DIRS} ${OCTOMAP_INCLUDE_DIRS})
 include_directories(SYSTEM ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIR} ${EIGEN3_INCLUDE_DIRS} ${OCTOMAP_LIBRARIES})
+include_directories(${PCL_INCLUDE_DIRS} ${realsense2_INCLUDE_DIRS})
 
-
-add_executable(planning_scene src/planning_scene.cpp)
-target_link_libraries(planning_scene ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-
-add_executable(moveit_scene src/moveit_scene.cpp)
-target_link_libraries(moveit_scene ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+add_subdirectory(src)
 
  catkin_install_python(PROGRAMS
    script/gripperSever.py
