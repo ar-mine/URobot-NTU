@@ -1,6 +1,7 @@
 #include <iostream>
 #include <algorithm> 
 #include <string>
+#include <thread>
 // PCL
 #include <pcl/console/parse.h>
 #include <pcl/io/pcd_io.h>
@@ -8,6 +9,7 @@
 #include <pcl/filters/passthrough.h>
 #include <pcl/filters/statistical_outlier_removal.h>
 #include <pcl/visualization/cloud_viewer.h>
+#include <pcl/filters/voxel_grid.h>
 // Realsense
 #include <librealsense2/rs.hpp> 
 
@@ -23,51 +25,18 @@ public:
         if(readfile() < 0)
             exit(-1);
 
-        pcl::visualization::CloudViewer viewer("Cloud Viewer");
-        viewer.showCloud(cloud);
-        viewer.runOnVisualizationThread(boost::bind(&PointsHandle::viewerFunction, this, _1));
-
-        while(!viewer.wasStopped())
+        viewer_init();
+        thread th_input(&PointsHandle::input_thread, this);
+        cout<<cloud->points.size()<<endl;
+        while(!viewer->wasStopped())
         {   
-            string input_command;
-            cin>>input_command;
-            getchar();
-            if(input_command == "p")
-            {
-                string input_param;
-                while(!getline(cin, input_param));
-                vector<string> vstr;
-                cout<<"ok"<<endl;
-                boost::split(vstr, input_param, boost::is_any_of(" "), boost::token_compress_on);
-                cloud_backup = cloud;
-                passFiter(vstr[0], atof(vstr[1].c_str()), atof(vstr[2].c_str()));
-                viewer.showCloud(cloud);
-            }
-            else if(input_command == "o")
-            {
-                string input_param;
-                while(!getline(cin, input_param));
-                vector<string> vstr;
-                cout<<"ok"<<endl;
-                boost::split(vstr, input_param, boost::is_any_of(" "), boost::token_compress_on);
-                cloud_backup = cloud;
-                outlierFilter(atoi(vstr[0].c_str()), atof(vstr[1].c_str()));
-                viewer.showCloud(cloud);
-            }
-            else if(input_command == "s")
-            {
-                string input_param;
-                while(!getline(cin, input_param));
-                cout<<"ok"<<endl;
-                savefile(input_param);
-            }
-            else if(input_command == "b")
-            {
-                cloud = cloud_backup;
-                viewer.showCloud(cloud);
-            }
+            viewer->spinOnce (100);
+            loop();
+            //std::this_thread::sleep_for(100ms);
         }
+        th_input.join();
     }
+    
     ~PointsHandle()
     {
         cout<<"Quit"<<endl;
@@ -123,16 +92,90 @@ public:
         sor.filter(*cloud_filtered);
         cloud = cloud_filtered;
     }
- 
+    
+    void downsampleFilter(float res)
+    {
+        pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud_filtered (new pcl::PointCloud<pcl::PointXYZRGB>);
+        pcl::VoxelGrid<pcl::PointXYZRGB> sor;
+        sor.setInputCloud (cloud);
+        sor.setLeafSize (res, res, res);
+        sor.filter(*cloud_filtered);
+        cloud = cloud_filtered;
+    }
+
     void viewerFunction(pcl::visualization::PCLVisualizer& viewer)
     {
         ;
     }
 
+    void viewer_init()
+    {
+        pcl::visualization::PCLVisualizer::Ptr view (new pcl::visualization::PCLVisualizer ("3D Viewer"));
+        view->setBackgroundColor (0, 0, 0);
+        pcl::visualization::PointCloudColorHandlerRGBField<pcl::PointXYZRGB> rgb(cloud);
+        view->addPointCloud<pcl::PointXYZRGB> (cloud, rgb, "cloud");
+        view->setPointCloudRenderingProperties(pcl::visualization::PCL_VISUALIZER_POINT_SIZE, 2);
+        view->addCoordinateSystem (1.0);
+        view->initCameraParameters ();
+        viewer = view;
+    }
+
+    void loop()
+    {   
+        if(!input_vstr.empty())
+        {
+            cout<<"ok"<<endl;
+            string input_command = input_vstr[0];
+            if(input_command == "pf")
+            {
+                cloud_backup = cloud;
+                passFiter(input_vstr[1], atof(input_vstr[2].c_str()), atof(input_vstr[3].c_str()));
+                viewer->updatePointCloud(cloud);
+            }
+            else if(input_command == "of")
+            {
+                cloud_backup = cloud;
+                outlierFilter(atoi(input_vstr[1].c_str()), atof(input_vstr[2].c_str()));
+                viewer->updatePointCloud(cloud);
+            }
+            else if(input_command == "df")
+            {
+                cloud_backup = cloud;
+                downsampleFilter(atof(input_vstr[1].c_str()));
+                viewer->updatePointCloud(cloud);
+            }
+            else if(input_command == "s")
+            {
+                savefile(input_vstr[1]);
+            }
+            else if(input_command == "b")
+            {
+                cloud = cloud_backup;
+                viewer->updatePointCloud(cloud);
+            }
+            cout<<cloud->points.size()<<endl;
+            input_vstr.clear();
+        }
+    }
+
+    void input_thread()
+    {
+        while(!viewer->wasStopped())
+        {
+            vector<string> vstr;
+            string input_param;
+            while(!getline(cin, input_param));
+            boost::split(vstr, input_param, boost::is_any_of(" "), boost::token_compress_on);
+            input_vstr = vstr;
+        }
+    }
+
 private:
+    vector<string> input_vstr;
     string model_name;
     pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud;
     pcl::PointCloud<pcl::PointXYZRGB>::Ptr cloud_backup;
+    pcl::visualization::PCLVisualizer::Ptr viewer;
 };
 
 string modelNameParse(int argc, char *argv[])

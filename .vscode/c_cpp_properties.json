@@ -21,8 +21,8 @@
         "/home/armine/Codes/ROS/UR_ws/src/URobot-NTU/UR_Robot_Driver/ur_controllers/include/**",
         "/home/armine/Codes/ROS/UR_ws/src/URobot-NTU/UR_Robot_Driver/ur_robot_driver/include/**",
         "/home/armine/Codes/ROS/UR_ws/src/urdf_learning/include/**",
-        "/usr/include/**",
-        "/usr/include/pcl-1.10/**"
+        "/usr/include/pcl-1.11/**",
+        "/usr/include/**"
       ],
       "name": "ROS"
     }
