@@ -26,3 +26,10 @@ Solve the real-time problem when the task is heavy(print the stamp and get_time(
 ### TODO
 Beautify the window visualization when ```opencv_vis==True```
 ***
+# Version 1.2
+### Change
+1. Add some annotations for easier reading
+2. Add parser for roslaunch using
+3. Bias can be transfered from command line(left-top to right-bottom)
+### TODO
+Learn more about ROS service, the object_detection may be witten as service
