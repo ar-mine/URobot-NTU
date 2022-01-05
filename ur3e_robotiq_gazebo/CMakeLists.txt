@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1.3)
-project(ur3e_robotiq)
+project(ur3e_robotiq_gazebo)
 
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -52,7 +52,3 @@ include_directories(${THIS_PACKAGE_INCLUDE_DIRS})
 include_directories(SYSTEM ${catkin_INCLUDE_DIRS} ${Boost_INCLUDE_DIR} ${EIGEN3_INCLUDE_DIRS})
 include_directories(${PCL_INCLUDE_DIRS})
 
- catkin_install_python(PROGRAMS
-   script/gripperSever.py
-   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
- )

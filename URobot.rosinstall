@@ -1,0 +1,47 @@
+# Install moveit packages.
+# Used with wstool, users can download source of all packages of MoveIt.
+- git:
+    local-name: moveit_msgs
+    uri: https://github.com/ros-planning/moveit_msgs.git
+    version: master
+- git:
+    local-name: moveit_resources
+    uri: https://github.com/ros-planning/moveit_resources.git
+    version: master
+- git:
+    local-name: geometric_shapes
+    uri: https://github.com/ros-planning/geometric_shapes.git
+    version: noetic-devel
+- git:
+    local-name: moveit
+    uri: https://github.com/ros-planning/moveit.git
+    version: master
+- git:
+    local-name: rviz_visual_tools
+    uri: https://github.com/PickNikRobotics/rviz_visual_tools
+    version: master
+- git:
+    local-name: moveit_visual_tools
+    uri: https://github.com/ros-planning/moveit_visual_tools.git
+    version: master
+- git:
+    local-name: panda_moveit_config
+    uri: https://github.com/ros-planning/panda_moveit_config.git
+    version: melodic-devel
+
+# Install UR robot driver
+- git:
+    local-name: Universal_Robots_ROS_Driver
+    uri: https://github.com/UniversalRobots/Universal_Robots_ROS_Driver.git 
+    version: master
+
+- git:
+    local-name: fmauch_universal_robot
+    uri: https://github.com/fmauch/universal_robot.git
+    version: calibration_devel
+
+# Install gripper
+- git:
+    local-name: robotiq
+    uri: https://github.com/ar-mine/robotiq.git
+    version: kinetic_devel
