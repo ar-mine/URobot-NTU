@@ -29,7 +29,7 @@
     NOTE: this imports the Gazebo-wrapper main macro, NOT the regular
           xacro macro (which is hosted by ur_description).
   -->
-  <xacro:include filename="$(find ur_dlidar_gazebo)/urdf/ur.xacro"/>
+  <xacro:include filename="$(find ur3e_robotiq_gazebo)/urdf/ur.xacro"/>
   <xacro:include filename="$(find robotiq_2f_140_gripper_visualization)/urdf/robotiq_arg2f_140_model.xacro" />
 
   <joint name="ur3e_gripper_joint" type="fixed">
