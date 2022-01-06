@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: ur3e_robotiq_gazebo
+    relative_path: urdf/ur3e_robotiq.urdf
+    xacro_args: ""
+  SRDF:
+    relative_path: config/ur_robotiq_robot_gazebo.srdf
+  CONFIG:
+    author_name: armine
+    author_email: TANR0041@e.ntu.edu.sg
+    generated_timestamp: 1641481130
