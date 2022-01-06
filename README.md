@@ -10,7 +10,7 @@ $ source /opt/ros/<your_ros_version>/setup.bash
 $ mkdir -p catkin_ws/src && cd catkin_ws/src
 
 # Clone repo 
-$ git clone git@github.com:ar-mine/ur_dlidar.git
+$ git clone https://github.com/ar-mine/URobot-NTU.git
 
 # Install by using wstool
 wstool init .
