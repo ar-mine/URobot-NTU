@@ -44,4 +44,4 @@
 - git:
     local-name: robotiq
     uri: https://github.com/ar-mine/robotiq.git
-    version: kinetic_devel
+    version: kinetic-devel
