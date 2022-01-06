@@ -24,6 +24,9 @@ $ rosdep update
 $ cd ..
 $ rosdep install --from-paths src --ignore-src -y
 
+# Install Plugin
+git clone https://github.com/roboticsgroup/roboticsgroup_gazebo_plugins.git
+
 # build the workspace
 $ catkin build
 
