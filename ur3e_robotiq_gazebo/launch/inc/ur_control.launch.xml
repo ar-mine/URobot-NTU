@@ -31,6 +31,8 @@
 
   <!-- Load controller settings -->
   <rosparam file="$(arg controller_config_file)" command="load"/>
+  <rosparam file="$(find robotiq_2f_140_gripper_visualization)/config/gripper_controller_robotiq.yaml" command="load" />
+
 
   <!-- Start Gazebo and load the empty world if requested to do so -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch" if="$(arg start_gazebo)">

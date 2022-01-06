@@ -17,9 +17,6 @@ wstool init .
 wstool merge -t . URobot-NTU/URobot.rosinstall
 wstool update -t .
 
-# If python-pymodbus install not successful
-$ sudo apt install python3-pymodbus
-
 # install dependencies
 $ sudo apt update -qq
 $ sudo apt dist-upgrade
@@ -32,4 +29,11 @@ $ catkin build
 
 # activate the workspace (ie: source it)
 $ source devel/setup.bash
+
+--------------------------------------
+# test simulation
+$ roslaunch ur3e_robotiq_gazebo ur3e_gripper_bringup.launch
+(Another command line)
+$ rosrun rqt_joint_trajectory_controller rqt_joint_trajectory_controller
+
 ```
